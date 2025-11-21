@@ -33,11 +33,7 @@ class ItemCard extends StatelessWidget {
               color: color.withOpacity(0.1),
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Icon(
-              _getIcon(),
-              color: color,
-              size: 24,
-            ),
+            child: Icon(_getIcon(), color: color, size: 24),
           ),
           const SizedBox(width: 16),
           Expanded(
@@ -46,16 +42,10 @@ class ItemCard extends StatelessWidget {
               children: [
                 Text(
                   titulo,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                 ),
                 const SizedBox(height: 4),
-                Text(
-                  subtitulo,
-                  style: const TextStyle(color: Colors.grey),
-                ),
+                Text(subtitulo, style: const TextStyle(color: Colors.grey)),
               ],
             ),
           ),
@@ -71,10 +61,7 @@ class ItemCard extends StatelessWidget {
                   child: const Text('Reservar'),
                 )
               : Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 8,
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   decoration: BoxDecoration(
                     color: Colors.red.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(8),

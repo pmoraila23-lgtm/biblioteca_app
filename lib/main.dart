@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/login_screen.dart';
+import 'screens/bienvenida_screen.dart';
 
 void main() => runApp(const BibliotecaApp());
 
@@ -19,7 +19,7 @@ class BibliotecaApp extends StatelessWidget {
           centerTitle: true,
         ),
       ),
-      home: const LoginScreen(),
+      home: const BienvenidaScreen(),
     );
   }
 }

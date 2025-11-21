@@ -34,20 +34,12 @@ class ReservasScreen extends StatelessWidget {
               color: Colors.grey.withOpacity(0.1),
               shape: BoxShape.circle,
             ),
-            child: const Icon(
-              Icons.calendar_today,
-              size: 60,
-              color: Colors.grey,
-            ),
+            child: const Icon(Icons.calendar_today, size: 60, color: Colors.grey),
           ),
           const SizedBox(height: 20),
           const Text(
             'No tienes reservas',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.grey,
-            ),
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.grey),
           ),
           const SizedBox(height: 8),
           const Text(

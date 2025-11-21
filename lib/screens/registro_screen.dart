@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'home_screen.dart';
-import 'registro_screen.dart';
+import 'login_screen.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class RegistroScreen extends StatelessWidget {
+  const RegistroScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,21 +28,14 @@ class LoginScreen extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.blue.withOpacity(0.1),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.local_library,
-                    size: 50,
-                    color: Colors.blue,
-                  ),
+                const Icon(
+                  Icons.person_add,
+                  size: 50,
+                  color: Colors.blue,
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 16),
                 const Text(
-                  'Iniciar Sesión',
+                  'Crear Cuenta',
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -51,10 +43,33 @@ class LoginScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  'Ingresa tus credenciales',
+                  'Completa tus datos',
                   style: TextStyle(color: Colors.grey),
                 ),
                 const SizedBox(height: 32),
+                // Nombre
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Nombre completo',
+                    prefixIcon: const Icon(Icons.person_outlined),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                // Matrícula
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Matrícula',
+                    prefixIcon: const Icon(Icons.badge_outlined),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                // Email
                 TextField(
                   decoration: InputDecoration(
                     hintText: 'Correo electrónico',
@@ -65,6 +80,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
+                // Password
                 TextField(
                   obscureText: true,
                   decoration: InputDecoration(
@@ -76,13 +92,20 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 24),
+                // Botón Registrarse
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (_) => const HomeScreen()),
+                        MaterialPageRoute(builder: (_) => const LoginScreen()),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('✓ Cuenta creada. Inicia sesión'),
+                          backgroundColor: Colors.green,
+                        ),
                       );
                     },
                     style: ElevatedButton.styleFrom(
@@ -91,22 +114,23 @@ class LoginScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    child: const Text('Entrar', style: TextStyle(fontSize: 16)),
+                    child: const Text('Registrarse', style: TextStyle(fontSize: 16)),
                   ),
                 ),
                 const SizedBox(height: 16),
+                // Link a Login
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('¿No tienes cuenta?'),
+                    const Text('¿Ya tienes cuenta?'),
                     TextButton(
                       onPressed: () {
                         Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(builder: (_) => const RegistroScreen()),
+                          MaterialPageRoute(builder: (_) => const LoginScreen()),
                         );
                       },
-                      child: const Text('Regístrate'),
+                      child: const Text('Inicia Sesión'),
                     ),
                   ],
                 ),

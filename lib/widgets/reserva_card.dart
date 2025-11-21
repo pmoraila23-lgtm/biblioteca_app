@@ -19,10 +19,7 @@ class ReservaCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: Colors.green.withOpacity(0.3),
-          width: 2,
-        ),
+        border: Border.all(color: Colors.green.withOpacity(0.3), width: 2),
       ),
       child: Row(
         children: [
@@ -32,11 +29,7 @@ class ReservaCard extends StatelessWidget {
               color: _getColor().withOpacity(0.1),
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Icon(
-              _getIcon(),
-              color: _getColor(),
-              size: 24,
-            ),
+            child: Icon(_getIcon(), color: _getColor(), size: 24),
           ),
           const SizedBox(width: 16),
           Expanded(
@@ -54,10 +47,7 @@ class ReservaCard extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   reserva.nombre,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                 ),
                 const SizedBox(height: 4),
                 Text(
@@ -69,10 +59,7 @@ class ReservaCard extends StatelessWidget {
           ),
           TextButton(
             onPressed: onCancelar,
-            child: const Text(
-              'Cancelar',
-              style: TextStyle(color: Colors.red),
-            ),
+            child: const Text('Cancelar', style: TextStyle(color: Colors.red)),
           ),
         ],
       ),
