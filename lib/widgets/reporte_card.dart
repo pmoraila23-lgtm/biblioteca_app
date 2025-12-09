@@ -3,121 +3,165 @@ import '../models/reporte.dart';
 
 class ReporteCard extends StatelessWidget {
   final Reporte reporte;
+  final Function(bool) onResueltoCambiado;
+  final VoidCallback onEditar;
+  final VoidCallback onEliminar;
 
-  const ReporteCard({super.key, required this.reporte});
+  const ReporteCard({
+    super.key,
+    required this.reporte,
+    required this.onResueltoCambiado,
+    required this.onEditar,
+    required this.onEliminar,
+  });
+
+  String _formatearFecha(DateTime fecha) {
+    final meses = [
+      'ene',
+      'feb',
+      'mar',
+      'abr',
+      'may',
+      'jun',
+      'jul',
+      'ago',
+      'sep',
+      'oct',
+      'nov',
+      'dic'
+    ];
+    return '${fecha.day} ${meses[fecha.month - 1]} ${fecha.year} • ${fecha.hour}:${fecha.minute.toString().padLeft(2, '0')}';
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Card(
       margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: BorderSide(
+          color: reporte.resuelto
+              ? const Color(0xFF03DAC6).withOpacity(0.3)
+              : const Color(0xFFFF6B6B).withOpacity(0.3),
+          width: 2,
+        ),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Header
-          Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: _getColor().withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(10),
+      child: ListTile(
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 8,
+        ),
+        leading: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: reporte.resuelto
+                ? const Color(0xFF03DAC6).withOpacity(0.2)
+                : const Color(0xFFFF6B6B).withOpacity(0.2),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Icon(
+            reporte.resuelto ? Icons.check_circle : Icons.error,
+            color: reporte.resuelto
+                ? const Color(0xFF03DAC6)
+                : const Color(0xFFFF6B6B),
+            size: 32,
+          ),
+        ),
+        title: Text(
+          reporte.titulo,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+            decoration:
+                reporte.resuelto ? TextDecoration.lineThrough : null,
+            color: reporte.resuelto ? Colors.grey : Colors.white,
+          ),
+        ),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (reporte.descripcion.isNotEmpty) ...[
+              const SizedBox(height: 4),
+              Text(
+                reporte.descripcion,
+                style: TextStyle(
+                  color: reporte.resuelto
+                      ? Colors.grey
+                      : const Color(0xFFB0B0B0),
                 ),
-                child: Icon(_getIcon(), color: _getColor(), size: 24),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '${reporte.tipo} - ${reporte.recurso}',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-                    Text(
-                      reporte.usuario,
-                      style: const TextStyle(color: Colors.grey, fontSize: 13),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                decoration: BoxDecoration(
-                  color: _getEstadoColor().withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Text(
-                  reporte.estado,
-                  style: TextStyle(
-                    color: _getEstadoColor(),
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
             ],
-          ),
-          const SizedBox(height: 12),
-          // Descripción
-          Text(
-            reporte.descripcion,
-            style: const TextStyle(fontSize: 14),
-          ),
-          const SizedBox(height: 8),
-          // Fecha
-          Text(
-            reporte.fecha,
-            style: const TextStyle(color: Colors.grey, fontSize: 12),
-          ),
-        ],
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                const Icon(
+                  Icons.access_time,
+                  size: 14,
+                  color: Colors.grey,
+                ),
+                const SizedBox(width: 4),
+                Text(
+                  _formatearFecha(reporte.fecha),
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Switch(
+              value: reporte.resuelto,
+              onChanged: onResueltoCambiado,
+              activeColor: const Color(0xFF03DAC6),
+              activeTrackColor: const Color(0xFF03DAC6).withOpacity(0.5),
+            ),
+            PopupMenuButton(
+              icon: const Icon(Icons.more_vert),
+              itemBuilder: (context) => [
+                PopupMenuItem(
+                  value: 'editar',
+                  child: const Row(
+                    children: [
+                      Icon(Icons.edit, color: Color(0xFF6B4CE6)),
+                      SizedBox(width: 12),
+                      Text('Editar'),
+                    ],
+                  ),
+                  onTap: () {
+                    Future.delayed(
+                      const Duration(milliseconds: 100),
+                      onEditar,
+                    );
+                  },
+                ),
+                PopupMenuItem(
+                  value: 'eliminar',
+                  child: const Row(
+                    children: [
+                      Icon(Icons.delete, color: Color(0xFFFF6B6B)),
+                      SizedBox(width: 12),
+                      Text('Eliminar'),
+                    ],
+                  ),
+                  onTap: () {
+                    Future.delayed(
+                      const Duration(milliseconds: 100),
+                      onEliminar,
+                    );
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
-  }
-
-  Color _getColor() {
-    switch (reporte.tipo) {
-      case 'Cubículo':
-        return Colors.blue;
-      case 'Computadora':
-        return Colors.green;
-      case 'Libro':
-        return Colors.purple;
-      default:
-        return Colors.orange;
-    }
-  }
-
-  IconData _getIcon() {
-    switch (reporte.tipo) {
-      case 'Cubículo':
-        return Icons.meeting_room;
-      case 'Computadora':
-        return Icons.computer;
-      case 'Libro':
-        return Icons.book;
-      default:
-        return Icons.report_problem;
-    }
-  }
-
-  Color _getEstadoColor() {
-    switch (reporte.estado) {
-      case 'Pendiente':
-        return Colors.orange;
-      case 'En proceso':
-        return Colors.blue;
-      case 'Resuelto':
-        return Colors.green;
-      default:
-        return Colors.grey;
-    }
   }
 }
