@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
-import 'registro_screen.dart';
+import 'register_screen.dart'; // ← CAMBIADO de registro a register
 
 class BienvenidaScreen extends StatelessWidget {
   const BienvenidaScreen({super.key});
@@ -106,7 +106,7 @@ class BienvenidaScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const RegistroScreen(),
+                          builder: (context) => const RegisterScreen(),
                         ),
                       );
                     },

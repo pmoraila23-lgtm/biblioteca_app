@@ -2,10 +2,30 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'dart:convert';
 import 'package:path_provider/path_provider.dart';
+
+// Firebase
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
 import 'screens/bienvenida_screen.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Inicializa Firebase (captura errores para diagnóstico)
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  } catch (e, st) {
+    // Imprime el error y la traza; no detiene la app para facilitar depuración
+    // (si Firebase es crítico, puedes rethrow o salir aquí)
+    // ignore: avoid_print
+    print('Error inicializando Firebase: $e');
+    // ignore: avoid_print
+    print(st);
+  }
+
   await initializeAppData();
   runApp(const BibliotecaApp());
 }
@@ -18,17 +38,14 @@ Future<void> initializeAppData() async {
     final librosFile = File('${directory.path}/libros.json');
     final reservasFile = File('${directory.path}/reservas.json');
 
-    // Crear archivo de reportes si no existe
     if (!await reportesFile.exists()) {
       final reportesIniciales = {
         'reportes': [],
         'fecha_creacion': DateTime.now().toIso8601String(),
       };
       await reportesFile.writeAsString(jsonEncode(reportesIniciales));
-      print('✓ Archivo reportes.json creado');
     }
 
-    // Crear archivo de libros si no existe
     if (!await librosFile.exists()) {
       final librosIniciales = {
         'libros': [
@@ -50,17 +67,14 @@ Future<void> initializeAppData() async {
         'fecha_creacion': DateTime.now().toIso8601String(),
       };
       await librosFile.writeAsString(jsonEncode(librosIniciales));
-      print('✓ Archivo libros.json creado');
     }
 
-    // Crear archivo de reservas si no existe
     if (!await reservasFile.exists()) {
       final reservasIniciales = {
         'reservas': [],
         'fecha_creacion': DateTime.now().toIso8601String(),
       };
       await reservasFile.writeAsString(jsonEncode(reservasIniciales));
-      print('✓ Archivo reservas.json creado');
     }
   } catch (e) {
     print('Error al inicializar datos: $e');
@@ -80,28 +94,29 @@ class BibliotecaApp extends StatelessWidget {
     );
   }
 
-  // Tema oscuro personalizado
   ThemeData _buildDarkTheme() {
-    var themeData = ThemeData(
+    return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
 
-      // Esquema de colores principal
-      colorScheme: const ColorScheme.dark(
-        primary: Color(0xFF6B4CE6), // Púrpura vibrante
-        secondary: Color(0xFF03DAC6), // Verde azulado
-        tertiary: Color(0xFFFF6B6B), // Rojo coral
-        surface: Color(0xFF1E1E2E), // Fondo principal
-        error: Color(0xFFCF6679),
+      // Colores base (fromSeed ayuda a mantener coherencia)
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: const Color(0xFF6B4CE6),
+        brightness: Brightness.dark,
+      ).copyWith(
+        primary: const Color(0xFF6B4CE6),
+        secondary: const Color(0xFF03DAC6),
+        tertiary: const Color(0xFFFF6B6B),
+        surface: const Color(0xFF1E1E2E),
+        error: const Color(0xFFCF6679),
         onPrimary: Colors.white,
         onSecondary: Colors.black,
-        onSurface: Color(0xFFE0E0E0),
+        onSurface: const Color(0xFFE0E0E0),
       ),
 
-      // Scaffold
       scaffoldBackgroundColor: const Color(0xFF121218),
 
-      // AppBar personalizado
+      // AppBar
       appBarTheme: const AppBarTheme(
         backgroundColor: Color(0xFF1E1E2E),
         elevation: 0,
@@ -114,36 +129,7 @@ class BibliotecaApp extends StatelessWidget {
         iconTheme: IconThemeData(color: Colors.white),
       ),
 
-      // Cards personalizadas
-      cardTheme: CardThemeData(
-  color: const Color(0xFF1E1E2E),
-  elevation: 4,
-  shadowColor: Colors.black.withOpacity(0.3),
-  shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(16),
-  ),
-),
-      // Botones elevados
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF6B4CE6),
-          foregroundColor: Colors.white,
-          elevation: 3,
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-        ),
-      ),
-
-      // Botones de texto
-      textButtonTheme: TextButtonThemeData(
-        style: TextButton.styleFrom(
-          foregroundColor: const Color(0xFF6B4CE6),
-        ),
-      ),
-
-      // Campos de texto
+      // TextFields
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: const Color(0xFF2A2A3C),
@@ -159,31 +145,31 @@ class BibliotecaApp extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(color: Color(0xFF6B4CE6), width: 2),
         ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Color(0xFFCF6679), width: 1),
+      ),
+
+      // Elevated buttons
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: const Color(0xFF6B4CE6),
+          foregroundColor: Colors.white,
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
         ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Color(0xFFCF6679), width: 2),
+      ),
+
+      // Cards (usar CardThemeData para compatibilidad según SDK)
+      cardTheme: CardThemeData(
+        color: const Color(0xFF1E1E2E),
+        elevation: 4,
+        shadowColor: Colors.black.withOpacity(0.3),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
         ),
-        labelStyle: const TextStyle(color: Color(0xFFB0B0B0)),
-        hintStyle: const TextStyle(color: Color(0xFF707070)),
-        errorStyle: const TextStyle(color: Color(0xFFCF6679)),
       ),
 
-      // Dividers
-      dividerTheme: const DividerThemeData(
-        color: Color(0xFF2A2A3C),
-        thickness: 1,
-      ),
-
-      // Iconos
-      iconTheme: const IconThemeData(
-        color: Color(0xFF6B4CE6),
-      ),
-
-      // Dialog
+      // Dialogs
       dialogTheme: DialogThemeData(
         backgroundColor: const Color(0xFF1E1E2E),
         shape: RoundedRectangleBorder(
@@ -191,21 +177,18 @@ class BibliotecaApp extends StatelessWidget {
         ),
       ),
 
-      // Switch
+      // Switch: usar MaterialStateProperty/MaterialState
       switchTheme: SwitchThemeData(
         thumbColor: MaterialStateProperty.resolveWith((states) {
-          if (states.contains(MaterialState.selected)) {
-            return const Color(0xFF03DAC6);
-          }
+          if (states.contains(MaterialState.selected)) return const Color(0xFF03DAC6);
           return const Color(0xFF707070);
         }),
         trackColor: MaterialStateProperty.resolveWith((states) {
-          if (states.contains(MaterialState.selected)) {
-            return const Color(0xFF03DAC6).withOpacity(0.5);
-          }
+          if (states.contains(MaterialState.selected)) return const Color(0xFF03DAC6).withOpacity(0.5);
           return const Color(0xFF3A3A4C);
         }),
       ),
+
       // FloatingActionButton
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         backgroundColor: Color(0xFF6B4CE6),
@@ -224,6 +207,5 @@ class BibliotecaApp extends StatelessWidget {
         ),
       ),
     );
-    return themeData;
   }
 }
