@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'login_screen.dart';
 
-class RegistroScreen extends StatefulWidget { // ← CAMBIADO: era RegisterScreen
-  const RegistroScreen({super.key}); // ← CAMBIADO
+class RegistroScreen extends StatefulWidget { 
+  const RegistroScreen({super.key}); 
 
   @override
-  State<RegistroScreen> createState() => _RegistroScreenState(); // ← CAMBIADO
+  State<RegistroScreen> createState() => _RegistroScreenState(); 
 }
 
-class _RegistroScreenState extends State<RegistroScreen> { // ← CAMBIADO
+class _RegistroScreenState extends State<RegistroScreen> { 
   final _email = TextEditingController();
   final _password = TextEditingController();
 
