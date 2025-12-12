@@ -22,14 +22,14 @@ Contacto
                                                                       Descripción 
 Sistema de Gestión de Biblioteca es una aplicación móvil desarrollada en Flutter que facilita la administración y gestión de recursos bibliotecarios. La aplicación permite a los usuarios y administradores gestionar de manera eficiente el préstamo de libros, la reserva de espacios de estudio (cubículos) y el uso de computadoras.
 
-¿Qué hace esta aplicación?
+                                                ¿Qué hace esta aplicación?
 Gestión de Libros: Catálogo completo con información detallada de cada libro, disponibilidad en tiempo real y sistema de préstamos
 Reserva de Cubículos: Sistema de reservas para espacios de estudio individuales o grupales
 Gestión de Computadoras: Control de asignación y uso de computadoras de la biblioteca
 Sistema de Reportes: Generación de reportes detallados sobre el uso de recursos
 Portal de Usuario: Visualización personalizada de todas las reservas y préstamos activos
 
-¿Por qué es útil?
+                                                          ¿Por qué es útil?
 Este proyecto resuelve la necesidad de digitalizar y optimizar los procesos de gestión bibliotecaria, eliminando el uso de papel y reduciendo los tiempos de espera. Permite a los usuarios reservar recursos desde cualquier lugar y a los administradores tener un control centralizado de todos los recursos.
 
 ¿Para quién esta pensado?
