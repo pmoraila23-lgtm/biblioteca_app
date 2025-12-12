@@ -6,16 +6,27 @@
 Tabla de Contenidos:
 
 Descripción
+
 Características
+
 Screenshots
+
 Tecnologías
+
 Requisitos Previos
+
 Instalación
+
 Uso
+
 Estructura del Proyecto
+
 Estado del Desarrollo
+
 Contribuir
+
 Licencia
+
 Contacto
 
 
@@ -24,9 +35,13 @@ Sistema de Gestión de Biblioteca es una aplicación móvil desarrollada en Flut
 
                                                 ¿Qué hace esta aplicación?
 Gestión de Libros: Catálogo completo con información detallada de cada libro, disponibilidad en tiempo real y sistema de préstamos
+
 Reserva de Cubículos: Sistema de reservas para espacios de estudio individuales o grupales
+
 Gestión de Computadoras: Control de asignación y uso de computadoras de la biblioteca
+
 Sistema de Reportes: Generación de reportes detallados sobre el uso de recursos
+
 Portal de Usuario: Visualización personalizada de todas las reservas y préstamos activos
 
                                                           ¿Por qué es útil?
@@ -34,38 +49,59 @@ Este proyecto resuelve la necesidad de digitalizar y optimizar los procesos de g
 
 ¿Para quién esta pensado?
 Estudiantes: Para reservar espacios de estudio y préstamos de libros
+
 Bibliotecarios: Para gestionar recursos y generar reportes
+
 Administradores: Para supervisar el uso general y tomar decisiones basadas en datos
 
                                                                       Características
 Catálogo de Libros:
 Búsqueda y filtrado de libros
+
 Información detallada (autor, ISBN, categoría, disponibilidad)
+
 Sistema de préstamos con fechas de devolución
+
 
 Gestión de Cubículos:
 Visualización de disponibilidad en tiempo real
+
 Reserva por fecha y horario
+
 Diferentes capacidades (individual, grupal)
+
 
 Administración de Computadoras:
 Asignación de equipos disponibles
+
 Control de tiempo de uso
+
 Estado de cada equipo
+
 
 Sistema de Reportes:
 Reportes de préstamos de libros
+
 Estadísticas de uso de cubículos
+
 Reportes de uso de computadoras
+
 Exportación de datos
+
 
 Portal Personal:
 Vista consolidada de todas tus reservas
+
 Historial de préstamos
+
 Notificaciones de vencimiento
+
 
 Módulo de Estadísticas:
 Dashboard visual (En desarrollo)
+
 Métricas de uso de recursos
+
 Tendencias y análisis
+
 
