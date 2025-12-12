@@ -1,16 +1,3 @@
-# biblioteca_app
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Sistema de Gestión de Biblioteca 
+ <img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/8b96bdef-f72e-4e69-9b96-dc8f2961582a" />
+ 
