@@ -106,13 +106,13 @@ Tendencias y análisis
 
 
                                                                                 Screenshots
-                                                                          Pantalla Principal / Home
-            <img width="746" height="1600" alt="image" src="https://github.com/user-attachments/assets/325621ba-d072-44aa-8351-503c52f554cb" />
+Pantalla Principal / Home
+<img width="746" height="1600" alt="image" src="https://github.com/user-attachments/assets/325621ba-d072-44aa-8351-503c52f554cb" />
                   
-                   Vista principal de la aplicación mostrando el dashboard con acceso rápido a libros, cubículos y computadoras
+Vista principal de la aplicación mostrando el dashboard con acceso rápido a libros, cubículos y computadoras
 
 
-                                                                               Catálogo de Libros
+  Catálogo de Libros
             <img width="746" height="1600" alt="image" src="https://github.com/user-attachments/assets/5a1b6283-067d-45c1-9465-955e2041f77c" />
 
                                   Catálogo completo de libros con información de disponibilidad, categorías y opciones de búsqueda
