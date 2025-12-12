@@ -9,16 +9,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  
-  # Dependencia necesaria para acceder a los directorios del sistema
-  path_provider: ^2.1.1
-  
-  # Firebase
-  firebase_core: ^2.24.2
-  firebase_auth: ^4.16.0
-  cloud_firestore: ^4.14.0
 
   cupertino_icons: ^1.0.2
+
+  # Para almacenar datos localmente (correo y contraseña)
+  shared_preferences: ^2.2.2
+
+  # Si usas archivos o imágenes dentro de la app
+  path_provider: ^2.1.1
 
 dev_dependencies:
   flutter_test:

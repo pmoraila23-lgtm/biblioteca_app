@@ -1,41 +1,61 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'login_screen.dart';
+import 'dart:convert';
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
 
-class RegistroScreen extends StatefulWidget { 
-  const RegistroScreen({super.key}); 
+class RegistroScreen extends StatefulWidget {
+  const RegistroScreen({super.key});
 
   @override
-  State<RegistroScreen> createState() => _RegistroScreenState(); 
+  State<RegistroScreen> createState() => _RegistroScreenState();
 }
 
-class _RegistroScreenState extends State<RegistroScreen> { 
+class _RegistroScreenState extends State<RegistroScreen> {
   final _email = TextEditingController();
   final _password = TextEditingController();
 
+  String error = "";
   bool loading = false;
-  String error = '';
 
-  Future<void> register() async {
+  Future<File> _getUsuariosFile() async {
+    final directory = await getApplicationDocumentsDirectory();
+    return File('${directory.path}/usuarios.json');
+  }
+
+  Future<void> registrar() async {
     setState(() {
       loading = true;
-      error = '';
+      error = "";
     });
 
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _email.text.trim(),
-        password: _password.text.trim(),
-      );
+      final file = await _getUsuariosFile();
 
-      if (mounted) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => const LoginScreen()),
-        );
+      List usuarios = [];
+
+      if (await file.exists()) {
+        final data = jsonDecode(await file.readAsString());
+        usuarios = data["usuarios"] ?? [];
       }
-    } on FirebaseAuthException catch (e) {
-      setState(() => error = e.message ?? 'Error desconocido');
+
+      final existe =
+          usuarios.any((u) => u["email"] == _email.text.trim());
+
+      if (existe) {
+        setState(() => error = "El correo ya está registrado.");
+        return;
+      }
+
+      usuarios.add({
+        "email": _email.text.trim(),
+        "password": _password.text.trim(),
+      });
+
+      await file.writeAsString(jsonEncode({"usuarios": usuarios}));
+
+      Navigator.pop(context);
+    } catch (e) {
+      setState(() => error = "Error al registrar: $e");
     } finally {
       setState(() => loading = false);
     }
@@ -46,14 +66,14 @@ class _RegistroScreenState extends State<RegistroScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text("Crear cuenta")),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(20),
         child: Column(
           children: [
             TextField(
               controller: _email,
               decoration: const InputDecoration(labelText: "Correo"),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 12),
             TextField(
               controller: _password,
               obscureText: true,
@@ -63,8 +83,8 @@ class _RegistroScreenState extends State<RegistroScreen> {
             if (error.isNotEmpty)
               Text(error, style: const TextStyle(color: Colors.red)),
             ElevatedButton(
-              onPressed: loading ? null : register,
-              child: Text(loading ? "Cargando..." : "Registrarme"),
+              onPressed: loading ? null : registrar,
+              child: Text(loading ? "Guardando..." : "Registrar"),
             ),
           ],
         ),
@@ -72,3 +92,4 @@ class _RegistroScreenState extends State<RegistroScreen> {
     );
   }
 }
+

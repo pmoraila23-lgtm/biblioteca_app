@@ -17,12 +17,12 @@ class Reserva {
 
   factory Reserva.fromJson(Map<String, dynamic> json) {
     return Reserva(
-      id: json['id'] ?? '',
-      libro: json['libro'] ?? '',
-      usuario: json['usuario'] ?? '',
+      id: json['id'],
+      libro: json['libro'],
+      usuario: json['usuario'],
       fechaPrestamo: DateTime.parse(json['fechaPrestamo']),
       fechaDevolucion: DateTime.parse(json['fechaDevolucion']),
-      devuelto: json['devuelto'] ?? false,
+      devuelto: json['devuelto'],
     );
   }
 
