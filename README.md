@@ -105,3 +105,72 @@ Métricas de uso de recursos
 Tendencias y análisis
 
 
+                                                                                Screenshots
+                                                                          Pantalla Principal / Home
+            <img width="746" height="1600" alt="image" src="https://github.com/user-attachments/assets/325621ba-d072-44aa-8351-503c52f554cb" />
+                  
+                   Vista principal de la aplicación mostrando el dashboard con acceso rápido a libros, cubículos y computadoras
+
+
+                                                                               Catálogo de Libros
+            <img width="746" height="1600" alt="image" src="https://github.com/user-attachments/assets/5a1b6283-067d-45c1-9465-955e2041f77c" />
+
+                                  Catálogo completo de libros con información de disponibilidad, categorías y opciones de búsqueda
+
+
+                                                                              Reserva de Cubículos
+            <img width="747" height="1600" alt="image" src="https://github.com/user-attachments/assets/f0c80e8d-e429-4c52-b854-970d57066a15" />
+
+                                              Sistema de reserva de cubículos con calendario y disponibilidad en tiempo real
+
+
+                                                                            Gestión de Computadoras
+            <img width="750" height="1599" alt="image" src="https://github.com/user-attachments/assets/b10d7531-3644-4300-9b63-bc2a236af04b" />
+
+                                        Vista personal donde el usuario puede consultar todas sus reservas activas y su historial
+
+
+                                                                              Sistema de Reportes
+            <img width="744" height="1600" alt="image" src="https://github.com/user-attachments/assets/2a075223-81f9-4784-b72f-b577d3d61028" />
+
+                                            Módulo de generación de reportes con diferentes opciones de filtrado y exportación
+
+
+                                                                                Tecnologías
+                                                    Framework y Lenguaje
+                                                    
+                                                    Flutter 3.x - Framework de UI multiplataforma de Google
+                                                    
+                                                    Dart 3.x - Lenguaje de programación optimizado para UI
+                                                    
+                                                    Almacenamiento de Datos
+                                                    
+                                                    JSON - Almacenamiento local de datos en formato JSON
+                                                    
+                                                    dart:convert - Codificación y decodificación de JSON
+                                                         
+                                                          
+                                                          Paquetes de Flutter Utilizados
+                                                                yamldependencies:
+                                                                  
+                                                                    flutter:
+                                                                    sdk: flutter
+                                                                  
+                                                                  # Gestión de estado:
+                                                                  provider: ^6.0.0
+                                                                  
+                                                                  # Almacenamiento local:
+                                                                  path_provider: ^2.0.0
+                                                                  
+                                                                  shared_preferences: ^2.0.0
+                                                                  
+                                                                  # UI y diseño:
+                                                                  google_fonts: ^5.0.0
+                                                                  
+                                                                  flutter_svg: ^2.0.0
+                                                                  
+                                                                  # Utilidades:
+                                                                  intl: ^0.18.0
+
+
+
