@@ -107,9 +107,10 @@ Tendencias y análisis
 
                                                                                 Screenshots
 Pantalla Principal / Home
+Vista principal de la aplicación mostrando el dashboard con acceso rápido a libros, cubículos y computadoras
 <img width="746" height="1600" alt="image" src="https://github.com/user-attachments/assets/325621ba-d072-44aa-8351-503c52f554cb" />
                   
-Vista principal de la aplicación mostrando el dashboard con acceso rápido a libros, cubículos y computadoras
+
 
 
   Catálogo de Libros
